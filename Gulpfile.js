@@ -40,6 +40,10 @@ gulp.task('copy:html', function () {
 
 });
 
+gulp.task('copy:favicon', function () {
+    return gulp.src('./main/assets/favicon.ico').pipe(gulp.dest('dist'));
+});
+
 gulp.task('build', function () {
     return gulp.src('./main/app.ts')
         .pipe(webpack(webpack_config))
@@ -51,7 +55,7 @@ gulp.task('clean-build:js', function(callback) {
 });
 
 gulp.task('clean-build:all', function (callback) {
-    runSequence('clean:all', 'less', 'build', 'copy:html', callback);
+    runSequence('clean:all', 'less', 'build', 'copy:html', 'copy:favicon', callback);
 });
 
 gulp.task('default', ['clean-build:js']);
