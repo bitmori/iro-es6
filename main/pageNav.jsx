@@ -1,5 +1,5 @@
 import React from "react";
-import {Constants, AppDispatcher} from "./flux/dispatcher";
+import {Constants, Reduxette} from "./reduxette";
 import {Glyph} from "elemental";
 import Romaji from "romaji";
 import rgb from "./utils";
@@ -14,8 +14,10 @@ export default class PageNav extends React.Component {
         };
     }
 
-    _onChange(payload) {
-        switch (payload.actionType) {
+    _onChange() {
+        let actionType = Reduxette.getState().actionType;
+        let payload = Reduxette.getState()[actionType];
+        switch (actionType) {
             case Constants.IRO_COLOR_SELECTED:
                 this.setState({
                     selectedName: payload.name,
@@ -29,11 +31,11 @@ export default class PageNav extends React.Component {
     }
 
     componentDidMount() {
-        this.token = AppDispatcher.register((payload) => this._onChange(payload));
+        this.unsubscribe = Reduxette.subscribe(() => this._onChange());
     }
 
     componentWillUnmount() {
-        AppDispatcher.unregister(this.token);
+        this.unsubscribe();
     }
 
     render() {

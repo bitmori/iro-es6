@@ -1,6 +1,6 @@
 import React from "react";
 import {Col, Card} from "elemental";
-import {Actions} from "./flux/dispatcher";
+import {Actions} from "./reduxette";
 import rgb from "./utils";
 
 export default class Swatch extends React.Component {
@@ -10,7 +10,6 @@ export default class Swatch extends React.Component {
 
     handleClick() {
         Actions.updatePageNav(this.props.data.name, this.props.data.kana, this.props.data.value);
-        //IroActions.updatePageNav(this.props.data.name, this.props.data.kana, this.props.data.value);
     }
 
     render() {
