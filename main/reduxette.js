@@ -1,4 +1,4 @@
-import {Enum, Factory} from "./reduxette/index";
+import {Enum, Factory} from "reduxette";
 
 export const Constants = Enum("IRO_COLOR_SELECTED");
 
@@ -25,6 +25,3 @@ export const Actions = {
         });
     }
 };
-//let unsubscribe = reduxette.subscribe(() => {
-//    console.log(reduxette.getState());
-//});
